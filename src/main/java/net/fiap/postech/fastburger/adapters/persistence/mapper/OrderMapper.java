@@ -151,6 +151,11 @@ public class OrderMapper {
         return order;
     }
 
+    public Order mapOrderToPay(Order order, Boolean wasPaid) {
+        order.setWasPaid(wasPaid);
+        return order;
+    }
+
     public Order mapOrderToFinished(Order order) {
         order.setStatus(StatusOrder.FINISHED);
         return order;
