@@ -1,6 +1,7 @@
 <h1 align="center">
     < 📜 > <br>
- Micro serviço de Pedidos
+ Micro serviço de Pedidos<br>
+<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Soatfiap/ms-fb-order/maven.yml">
 </h1>
  <h2 align="center">
  PÓS TECH - SOFTWARE ARCHITECTURE
