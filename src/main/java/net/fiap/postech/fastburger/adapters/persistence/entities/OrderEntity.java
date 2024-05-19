@@ -25,13 +25,19 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String orderNumber;
+
     private Double totalValue = BigDecimal.ZERO.doubleValue();
+
     private Boolean wasPaid = false;
+
     @UpdateTimestamp
     private LocalDateTime dateTimeCreation;
-    @ManyToOne
-    private ClientEntity client;
+
+    @Column(name = "client_id")
+    private Long client;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "order_itens",

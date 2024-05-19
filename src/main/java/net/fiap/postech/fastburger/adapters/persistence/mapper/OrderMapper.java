@@ -2,15 +2,15 @@ package net.fiap.postech.fastburger.adapters.persistence.mapper;
 
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ClientNotFoundException;
+import net.fiap.postech.fastburger.adapters.feignClients.client.MsFbCadastroClientFeignClientService;
+import net.fiap.postech.fastburger.adapters.feignClients.product.MsFbCadastroProductFeignClientService;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItemDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderRequestDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.ProductsOrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ProductEntity;
-import net.fiap.postech.fastburger.adapters.persistence.repositories.ClientRepository;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
-import net.fiap.postech.fastburger.adapters.persistence.repositories.ProductRepository;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.domain.Order;
 import net.fiap.postech.fastburger.application.domain.OrderItem;
@@ -22,9 +22,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
@@ -33,10 +32,10 @@ public class OrderMapper {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private MsFbCadastroClientFeignClientService clientFeignClientService;
 
     @Autowired
-    private ProductRepository productRepository;
+    private MsFbCadastroProductFeignClientService productFeignClientService;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -93,7 +92,7 @@ public class OrderMapper {
             throw new BusinessException("Sem produtos no pedido");
         }
         productsOrderDTO.forEach(item -> {
-            Product domain = this.productMapper.toDomain(this.productRepository.findById(item.getProductId()).get());
+            Product domain = this.productMapper.productResponseDTOToProduct(this.productFeignClientService.findProductById(item.getProductId()));
             products.add(domain);
         });
         return body;
@@ -105,25 +104,25 @@ public class OrderMapper {
         List<OrderItem> orderItems = new ArrayList<>();
 
         if (body.getClient() != null) {
-            var clientOrder = this.clientRepository.findClientEntityByCpf(body.getClient().getCpf());
+            var clientOrder = this.clientFeignClientService.findClientByCpf(body.getClient().getCpf());
         }
 
         if (body.getOrderItems().isEmpty()) {
             orderItensDTOS.forEach(product -> {
-                ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
+                ProductEntity productEntity = this.productMapper.productResponseDTOToProductEntity(this.productFeignClientService.findProductById(product.getProductId()));
                 orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity()));
             });
             body.setOrderItems(orderItems);
 
         } else {
             orderItensDTOS.forEach(product -> {
-                ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
+                ProductEntity productEntity = this.productMapper.productResponseDTOToProductEntity(this.productFeignClientService.findProductById(product.getProductId()));
                 body.getOrderItems().add(new OrderItem(null, productEntity.getSKU(), product.getQuantity()));
             });
         }
 
         orderItensDTOS.forEach(orderItem -> {
-            Double price = this.productRepository.findById(orderItem.getProductId()).get().getPrice();
+            Double price = this.productMapper.productResponseDTOToProductEntity(this.productFeignClientService.findProductById(orderItem.getProductId())).getPrice();
             Integer quantity = orderItem.getQuantity();
             valorTotal.updateAndGet(x -> x + (quantity * price));
         });
@@ -139,7 +138,9 @@ public class OrderMapper {
         Order orderParsed = new Order();
         orderParsed.setStatus(StatusOrder.RECEIVED);
         if (order.getClientCPF() != null && !order.getClientCPF().isBlank() && !order.getClientCPF().isEmpty()) {
-            Client domain = this.clientMapper.toDomain(this.clientRepository.findClientEntityByCpf(order.getClientCPF()).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado!")));
+            Client domain = Optional
+                    .of(this.clientMapper.clientResponseDTOtoDomain(this.clientFeignClientService
+                            .findClientByCpf(order.getClientCPF()))).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado!"));
             orderParsed.setClient(domain);
         }
         return orderParsed;

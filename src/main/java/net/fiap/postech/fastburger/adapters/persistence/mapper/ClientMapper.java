@@ -45,4 +45,8 @@ public class ClientMapper {
     public ClientResponseDTO toResponseDTO(ClientEntity clientEntity) {
         return modelMapper.map(clientEntity, ClientResponseDTO.class);
     }
+
+    public Client clientResponseDTOtoDomain(ClientResponseDTO clientResponseDTO) {
+        return modelMapper.map(clientResponseDTO, Client.class);
+    }
 }

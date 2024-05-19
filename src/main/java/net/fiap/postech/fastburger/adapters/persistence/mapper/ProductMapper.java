@@ -38,6 +38,14 @@ public class ProductMapper {
         return modelMapper.map(product, ProductDTO.class);
     }
 
+    public ProductEntity productResponseDTOToProductEntity(ProductResponseDTO product) {
+        return modelMapper.map(product, ProductEntity.class);
+    }
+
+    public Product productResponseDTOToProduct(ProductResponseDTO product) {
+        return modelMapper.map(product, Product.class);
+    }
+
     public ProductResponseDTO domainToDTOResponse(Product product) {
         return modelMapper.map(product, ProductResponseDTO.class);
     }

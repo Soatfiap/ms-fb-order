@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Challenge Pos Tech - Fiap", description = "Desafio Pos Tech Arquitetura de Software (SOAT-04) G44", version = "1.0.0"))
+@OpenAPIDefinition(info = @Info(title = "Challenge Pos Tech - Fiap MS fastburger de Orders", description = "Desafio Pos Tech Arquitetura de Software (SOAT-04) G44", version = "1.0.0"))
 public class FastburgerApplication {
 
     public static void main(String[] args) {
