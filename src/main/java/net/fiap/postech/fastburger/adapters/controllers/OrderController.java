@@ -95,7 +95,9 @@ public class OrderController {
     @PutMapping("/order/ready/{orderNumber}")
     public ResponseEntity orderReady(@PathVariable("orderNumber") String orderNumber) {
         Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
-        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, this.orderMapper.mapOrderToReady(order)));
+        order.setStatus(StatusOrder.READY);
+        Order ok = this.updateOrderGetway.update(orderNumber, order);
+        return ResponseEntity.ok(ok);
     }
 
     @PutMapping("/order/finished/{orderNumber}")

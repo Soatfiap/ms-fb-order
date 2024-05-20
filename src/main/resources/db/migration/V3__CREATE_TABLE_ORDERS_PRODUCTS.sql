@@ -7,5 +7,5 @@
 CREATE TABLE public.orders_product
 (
     order_id   int8 NOT NULL,
-    product_id int8 NOT NULL
+    product_id text NOT NULL
 );

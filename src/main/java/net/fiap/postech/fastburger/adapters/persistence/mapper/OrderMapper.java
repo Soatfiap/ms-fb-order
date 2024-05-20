@@ -72,7 +72,7 @@ public class OrderMapper {
         }
 
         if (saved.getClient() != null)
-            orderDTO.setClientCPF(saved.getClient().getCpf());
+            orderDTO.setClientCPF(saved.getClient());
 
         return orderDTO;
     }
@@ -104,7 +104,7 @@ public class OrderMapper {
         List<OrderItem> orderItems = new ArrayList<>();
 
         if (body.getClient() != null) {
-            var clientOrder = this.clientFeignClientService.findClientByCpf(body.getClient().getCpf());
+            var clientOrder = this.clientFeignClientService.findClientByCpf(body.getClient());
         }
 
         if (body.getOrderItems().isEmpty()) {
@@ -141,7 +141,7 @@ public class OrderMapper {
             Client domain = Optional
                     .of(this.clientMapper.clientResponseDTOtoDomain(this.clientFeignClientService
                             .findClientByCpf(order.getClientCPF()))).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado!"));
-            orderParsed.setClient(domain);
+            orderParsed.setClient(domain.getCpf());
         }
         return orderParsed;
     }

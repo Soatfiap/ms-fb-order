@@ -13,18 +13,18 @@ import java.util.List;
 @FeignClient(name = "cadastroProduct", url = "${MS-FB-CADASTRO}")
 public interface MsFbCadastroProductFeignClient {
 
-    @PostMapping("/api/v1/products")
+    @PostMapping("/api/v1/product")
     ResponseEntity<ProductDTO> saveProduct(@RequestBody @Valid ProductDTO productDTO);
 
-    @GetMapping("/api/v1/products")
+    @GetMapping("/api/v1/product")
     ResponseEntity<List<ProductResponseDTO>> findProductByCategory(@RequestParam("category") CategoryEnum categoryEnum);
 
-    @PutMapping("/api/v1/products/{sku}")
-    ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("sku") Long sku, @RequestBody @Valid ProductDTO productDTO);
+    @PutMapping("/api/v1/product/{sku}")
+    ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("sku") String sku, @RequestBody @Valid ProductDTO productDTO);
 
-    @PutMapping("/api/v1/products/{id}")
-    ResponseEntity<ProductResponseDTO> findProductById(@PathVariable("id") Long id);
+    @GetMapping("/api/v1/product/{id}")
+    ResponseEntity<ProductResponseDTO> findProductById(@PathVariable("id") String id);
 
-    @DeleteMapping("/api/v1/products/{sku}")
-    ResponseEntity<Void> deleteProductBySKU(@PathVariable("sku") Long sku);
+    @DeleteMapping("/api/v1/product/{sku}")
+    ResponseEntity<Void> deleteProductBySKU(@PathVariable("sku") String sku);
 }

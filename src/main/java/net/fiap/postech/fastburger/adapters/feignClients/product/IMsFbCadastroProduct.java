@@ -11,7 +11,7 @@ public interface IMsFbCadastroProduct {
 
     ProductDTO saveProduct(ProductDTO productDTO);
     List<ProductResponseDTO> findProductByCategory(CategoryEnum categoryEnum);
-    ProductResponseDTO updateProduct(Long sku, ProductDTO productDTO);
-    ProductResponseDTO findProductById(Long id);
-    void deleteProductBySKU(Long sku);
+    ProductResponseDTO updateProduct(String sku, ProductDTO productDTO);
+    ProductResponseDTO findProductById(String id);
+    void deleteProductBySKU(String sku);
 }

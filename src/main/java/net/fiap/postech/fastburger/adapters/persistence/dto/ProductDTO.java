@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductDTO {
 
+    private String sku;
     @NotBlank
     private String name;
 

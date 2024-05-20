@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductEntity {
 
-    private Long SKU;
+    private String SKU;
     private String name;
     private CategoryEnum categoryEnum;
     private Double price;

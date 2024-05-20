@@ -35,8 +35,8 @@ public class OrderEntity {
     @UpdateTimestamp
     private LocalDateTime dateTimeCreation;
 
-    @Column(name = "client_id")
-    private Long client;
+    @Column(name = "client_cpf")
+    private String client;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

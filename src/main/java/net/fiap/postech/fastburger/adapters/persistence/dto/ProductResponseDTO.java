@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductResponseDTO {
 
-    private Long sku;
+    private String sku;
 
     @NotBlank
     private String name;

@@ -10,7 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductImageEntity {
-
-    private Long id;
     private String url;
 }

@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.br.CPF;
 @NoArgsConstructor
 public class ClientResponseDTO {
 
-    private Long id;
+    private String id;
     @NotBlank
     @CPF
     private String cpf;

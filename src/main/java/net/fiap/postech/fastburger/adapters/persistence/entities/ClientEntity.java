@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClientEntity {
 
-    private Long id;
+    private String id;
     private String cpf;
     private String nome;
     private String email;

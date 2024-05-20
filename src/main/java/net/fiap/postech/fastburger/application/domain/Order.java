@@ -20,7 +20,7 @@ public class Order {
     private BigDecimal totalValue;
     private Boolean wasPaid = false;
     private LocalDateTime dateTimeCreation;
-    private Client client;
+    private String client;
     private List<OrderItem> orderItems;
     private StatusOrder status;
 }

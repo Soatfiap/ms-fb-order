@@ -7,6 +7,5 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductImage {
-    private Long id;
     private String url;
 }

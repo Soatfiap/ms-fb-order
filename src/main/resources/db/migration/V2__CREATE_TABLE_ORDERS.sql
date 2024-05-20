@@ -12,7 +12,7 @@ CREATE TABLE public.orders
     status             varchar(255) NULL,
     total_value        float8       NULL,
     was_paid           bool         NULL,
-    client_id          int8         NULL,
+    client_cpf          varchar(255)         NULL,
     CONSTRAINT orders_pkey PRIMARY KEY (id),
     CONSTRAINT orders_status_check CHECK (((status)::text = ANY
                                            (ARRAY [('RECEIVED'::character varying)::text, ('INPREPARATION'::character varying)::text, ('READY'::character varying)::text, ('FINISHED'::character varying)::text])))

@@ -28,17 +28,17 @@ public class MsFbCadastroProductFeignClientService implements IMsFbCadastroProdu
     }
 
     @Override
-    public ProductResponseDTO updateProduct(Long sku, ProductDTO productDTO) {
+    public ProductResponseDTO updateProduct(String sku, ProductDTO productDTO) {
         return this.msFbCadastroProductFeignClient.updateProduct(sku, productDTO).getBody();
     }
 
     @Override
-    public ProductResponseDTO findProductById(Long id) {
+    public ProductResponseDTO findProductById(String id) {
         return this.msFbCadastroProductFeignClient.findProductById(id).getBody();
     }
 
     @Override
-    public void deleteProductBySKU(Long sku) {
+    public void deleteProductBySKU(String sku) {
         this.msFbCadastroProductFeignClient.deleteProductBySKU(sku);
     }
 }
