@@ -1,10 +1,7 @@
 version: "3.2"
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    #    image: 4soatg44/ms-fb-order:1.0.0
+    image: 4soatg44/ms-fb-order:1.0.0
     ports:
       - "8080:8080"
     depends_on:
