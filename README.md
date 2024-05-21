@@ -34,3 +34,7 @@ que é composto por uma série de dispositivos e interfaces que permitem aos cli
 
 ### 📚  [Como executar a aplicação](HELP.md)
 
+Links Repo:
+https://github.com/Soatfiap/ms-fb-checkout
+https://github.com/Soatfiap/ms-fb-order
+https://github.com/Soatfiap/ms-fb-cadastro
