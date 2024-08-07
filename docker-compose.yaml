@@ -1,11 +1,15 @@
 version: "3.2"
 services:
   app:
-    image: 4soatg44/ms-fb-order:1.0.0
+#    image: 4soatg44/ms-fb-order:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/challenge"
       SPRING_DATASOURCE_USERNAME: "arch"
@@ -18,7 +22,6 @@ services:
       AWS_COGNITO_USER_POOL_ID: "us-east-1_ssXveW6jC"
       MERCADO_API: "https://api.mercadopago.com"
       MS_FB_CADASTRO: "http://localhost:8082"
-
     networks:
       - netChallenge
     restart: always
@@ -35,9 +38,20 @@ services:
       - volume-db-challenge:/var/lib/postgresql/data
     networks:
       - netChallenge
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    networks:
+      - netChallenge
+
 volumes:
   volume-db-challenge:
-  valume-api-challenge:
 
 networks:
   netChallenge:
