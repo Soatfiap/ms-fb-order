@@ -33,4 +33,12 @@ que é composto por uma série de dispositivos e interfaces que permitem aos cli
 <p/>
 
 ### 📚  [Como executar a aplicação](HELP.md)
-<!-- Just a comment to validate sonarqube 001 -->
+
+Links Repo:
+https://github.com/Soatfiap/ms-fb-checkout
+https://github.com/Soatfiap/ms-fb-order
+https://github.com/Soatfiap/ms-fb-cadastro
+
+https://sonarcloud.io/project/overview?id=Soatfiap_ms-fb-order
+
+push para video.
