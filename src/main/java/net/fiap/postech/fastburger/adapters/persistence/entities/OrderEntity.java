@@ -20,6 +20,7 @@ import java.util.Map;
 @Entity
 @Table(name = "orders")
 @Builder
+@ToString
 public class OrderEntity {
 
     @Id
