@@ -9,7 +9,6 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/challenge"
       SPRING_DATASOURCE_USERNAME: "arch"
@@ -41,17 +40,6 @@ services:
       - "5432:5432"
     volumes:
       - volume-db-challenge:/var/lib/postgresql/data
-    networks:
-      - netChallenge
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: "guest"
-      RABBITMQ_DEFAULT_PASS: "guest"
     networks:
       - netChallenge
 
