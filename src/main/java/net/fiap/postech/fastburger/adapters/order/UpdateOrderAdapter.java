@@ -38,12 +38,10 @@ public class UpdateOrderAdapter implements UpdateOrderOutPutPort {
     }
 
     @RabbitListener(queues = "saga-payment-order")
-    public void processOrderCreated(Order order) {
-        order.setWasPaid(true);
-        OrderEntity orderEntity = this.orderMapper.orderToOrderEntity(order);
-        OrderEntity saved = this.orderRepository.save(orderEntity);
-        Order order1 = this.orderMapper.orderEntityToOrder(saved);
-        rabbitTemplate.convertAndSend("paymentExchange", "payment.completed", order1.toString());
+    public void processOrderCreated(PayMentProcess payMentProcess) {
+        OrderEntity order = this.orderRepository.findOrderEntityByOrderNumber(payMentProcess.orderNumber());
+        order.setWasPaid(payMentProcess.wasPayed());
+        OrderEntity saved = this.orderRepository.save(order);
     }
 
 }
