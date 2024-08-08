@@ -26,7 +26,7 @@ services:
       RABBITMQ_PORT: "5672"
       RABBITMQ_USERNAME: "guest"
       RABBITMQ_PASSWORD: "guest"
-      RABBITMQ_QUEUE_NAME: "saga-payment"
+      RABBITMQ_QUEUE_NAME: "saga-payment-order"
     networks:
       - netChallenge
     restart: always
