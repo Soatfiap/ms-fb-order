@@ -33,7 +33,7 @@ que é composto por uma série de dispositivos e interfaces que permitem aos cli
 <p/>
 
 ### 📚  [Como executar a aplicação](HELP.md)
-
+#### 📚  [Justificativa uso do Padrão SAGA Coreografado](JUSTIFICATIVA_SAGA.md)
 Links Repo:
 https://github.com/Soatfiap/ms-fb-checkout
 https://github.com/Soatfiap/ms-fb-order

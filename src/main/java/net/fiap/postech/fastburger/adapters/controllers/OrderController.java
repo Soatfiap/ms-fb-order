@@ -106,10 +106,4 @@ public class OrderController {
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, this.orderMapper.mapOrderToFinished(order)));
     }
 
-    @PutMapping("/order/status/{orderNumber}/{wasPaid}")
-    public ResponseEntity updateStatusOrder(@PathVariable("orderNumber") String orderNumber, @PathVariable("wasPaid") Boolean wasPaid) {
-        Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
-        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, this.orderMapper.mapOrderToPay(order, wasPaid)));
-    }
-
 }
